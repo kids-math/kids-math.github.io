@@ -4,59 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/pico.min.css">
     <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="./js/utils.js"></script>
 
-    <title>Two-digit addition - 2nd grade</title>
-
-    <script type="text/javascript">
-        function randomIntFromInterval(min, max) { // min and max are included
-            return Math.floor(Math.random() * (max - min + 1) + min)
-        }
-
-        function twoDigitsForSumWithoutCarry() {
-            let n1 = randomIntFromInterval(10, 89)
-            let n2 = randomIntFromInterval(10, 99 - n1)
-
-            return {
-                n1: n1,
-                n2: n2,
-            }
-        }
-
-        function update() {
-            document.getElementById('table-body').innerHTML = '';
-
-            for (row = 0; row < 7; row++) {
-                let tr = '';
-                for (col = 0; col < 4; col++) {
-                    const {n1, n2} = twoDigitsForSumWithoutCarry()
-
-                    tr += `<td>
-                    <div class="two-digits">
-                        <div class="two-digits-plus">+</div>
-                        <div>${n1}</div>
-                        <div>${n2}</div>
-                    </div>
-                    <div class="two-digits-sum-line" />
-                    <div>&nbsp;&nbsp;</div>
-                </td>`
-                }
-                document.getElementById('table-body').innerHTML += tr
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            update();
-        }, false);
-    </script>
+    <title>Kids Math</title>
 </head>
 <body>
-<main class="container-fluid">
-    <h1 class="page-h1">Two-digit addition</h1>
+<main class="container">
+    <h1>Kids math</h1>
 
-    <table class="page-table two-digits-table">
-        <tbody id="table-body">
-        </tbody>
-    </table>
+    <h2>2nd grade</h2>
+    <a href="2nd-grade/two-digit-addition.html">Two-digit addition</a>
 </main>
 </body>
 </html>

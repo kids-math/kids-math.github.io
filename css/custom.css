@@ -15,6 +15,7 @@
 
 .two-digits {
     padding-left: 0.8em;
+    min-width: 3em;
 }
 
 .two-digits-plus {
