@@ -13,7 +13,7 @@
             let n1 = randomIntFromInterval(10, 89)
             let n1_01 = n1 - parseInt(n1/10)*10;
             let n1_10 = parseInt(n1/10);
-            let n2 = (randomIntFromInterval(1, 9 - n1_10) * 10 + randomIntFromInterval(0, 9 - n1_01)).toString()
+            let n2 = randomIntFromInterval(1, 9 - n1_10) * 10 + randomIntFromInterval(0, 9 - n1_01)
 
             return {
                 n1: n1,
