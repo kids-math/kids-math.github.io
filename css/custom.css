@@ -6,6 +6,12 @@
     border-bottom: none;
 }
 
+@media print{
+    .noprint{
+        display:none;
+    }
+}
+
 /*Two digits*/
 .two-digits-table td {
     font-size: 1.5em;

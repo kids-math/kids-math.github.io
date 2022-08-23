@@ -21,13 +21,15 @@
             }
         }
 
-        function update() {
+        function render(data) {
             document.getElementById('table-body').innerHTML = '';
 
             for (row = 0; row < 7; row++) {
                 let tr = '';
                 for (col = 0; col < 4; col++) {
-                    const {n1, n2} = twoDigitsForSumWithoutCarry()
+                    const d = data[row * 4 + col]
+                    const n1 = d[0]
+                    const n2 = d[1]
 
                     tr += `<td>
                     <div class="two-digits">
@@ -43,14 +45,51 @@
             }
         }
 
+        function loadDataFromHash() {
+            let data = []
+
+            let hash = window.location.hash
+            if (hash.length > 1) {
+                try {
+                    data = JSON.parse(hash.substring(1))
+                } catch (e) {
+                    // ignore err
+                }
+            }
+
+            return data
+        }
+
+        function updateData() {
+            let data = []
+            for (i = 0; i < 7 * 4; i++) {
+                const {n1, n2} = twoDigitsForSumWithoutCarry()
+                data.push([n1, n2])
+            }
+            history.replaceState(undefined, undefined, "#" + JSON.stringify(data))
+        }
+
+        function update() {
+            updateData()
+            let data = loadDataFromHash()
+            render(data)
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            update();
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
         }, false);
     </script>
 </head>
 <body>
 <main class="container-fluid">
-    <h1 class="page-h1">Two-digit addition</h1>
+    <h1 class="page-h1">
+        Two-digit addition <a class="noprint" onclick="update();">(update)</a>
+    </h1>
 
     <table class="page-table two-digits-table">
         <tbody id="table-body"></tbody>
