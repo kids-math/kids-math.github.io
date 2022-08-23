@@ -83,6 +83,15 @@
             }
             render(data)
         }, false);
+
+        window.addEventListener('hashchange', function () {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        });
     </script>
 </head>
 <body>
