@@ -1,0 +1,32 @@
+.page-h1 {
+    margin: 0 2em 2em;
+}
+
+.page-table td {
+    border-bottom: none;
+}
+
+/*Two digits*/
+.two-digits-table td {
+    font-size: 1.5em;
+    padding-bottom: 2.5em;
+    padding-left: 10%;
+}
+
+.two-digits {
+    padding-left: 0.8em;
+}
+
+.two-digits-plus {
+    position: absolute;
+    margin-left: -0.8em;
+    margin-top: 0.55em;
+}
+
+.two-digits-sum-line {
+    background-color: #415462;
+    width: 2em;
+    height: 0.1em;
+    margin-top: 0.1em;
+    -webkit-print-color-adjust: exact;
+}

@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/pico.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <title>Two-digit addition - 2nd grade</title>
+
+    <script type="text/javascript">
+        function randomIntFromInterval(min, max) { // min and max are included
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        function twoDigitsForSumWithoutCarry() {
+            let n1 = randomIntFromInterval(10, 89)
+            let n2 = randomIntFromInterval(10, 99 - n1)
+
+            return {
+                n1: n1,
+                n2: n2,
+            }
+        }
+
+        function update() {
+            document.getElementById('table-body').innerHTML = '';
+
+            for (row = 0; row < 7; row++) {
+                let tr = '';
+                for (col = 0; col < 4; col++) {
+                    const {n1, n2} = twoDigitsForSumWithoutCarry()
+
+                    tr += `<td>
+                    <div class="two-digits">
+                        <div class="two-digits-plus">+</div>
+                        <div>${n1}</div>
+                        <div>${n2}</div>
+                    </div>
+                    <div class="two-digits-sum-line" />
+                    <div>&nbsp;&nbsp;</div>
+                </td>`
+                }
+                document.getElementById('table-body').innerHTML += tr
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            update();
+        }, false);
+    </script>
+</head>
+<body>
+<main class="container-fluid">
+    <h1 class="page-h1">Two-digit addition</h1>
+
+    <table class="page-table two-digits-table">
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
