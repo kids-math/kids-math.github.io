@@ -12,7 +12,7 @@
     }
 }
 
-/*Two digits*/
+/*Two digit addition*/
 .two-digits-table td {
     font-size: 1.5em;
     padding-bottom: 2.5em;
@@ -36,4 +36,45 @@
     height: 0.1em;
     margin-top: 0.1em;
     -webkit-print-color-adjust: exact;
+}
+
+/*Two-digit pyramid*/
+.pyramid-table td {
+    font-size: 1.5em;
+    padding-bottom: 2.5em;
+}
+
+.pyramid {
+    margin: 0 auto;
+    width: 15.5em;
+    min-width: 15.5em;
+}
+
+.pyramid-row {
+    clear: both;
+}
+
+.pyramid-row-2nd-row {
+    margin-left: 2.5em;
+}
+
+.pyramid-row-1st-row {
+    margin-left: 5em;
+}
+
+.pyramid-cell {
+    width: 5em;
+    padding: 0.3em;
+    text-align: center;
+    border: 0.1em solid #933333;
+    -webkit-print-color-adjust: exact;
+    float: left;
+}
+
+.pyramid-cell-border-right-none {
+    border-right: none;
+}
+
+.pyramid-cell-border-bottom-none {
+    border-bottom: none;
 }

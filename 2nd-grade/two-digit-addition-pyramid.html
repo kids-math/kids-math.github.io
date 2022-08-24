@@ -1,0 +1,117 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/pico.min.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <script type="text/javascript" src="../js/utils.js"></script>
+
+    <title>Two-digit addition pyramid - 2nd grade</title>
+
+    <script type="text/javascript">
+        function genPyramid() {
+            let row1_1 = randomIntFromInterval(60, 99)
+
+            let row2_1 = randomIntFromInterval(25, row1_1 - 22)
+            let row2_2 = row1_1 - row2_1
+
+            let row3_2 = randomIntFromInterval(5, Math.min(row2_1, row2_2)-5)
+            let row3_1 = row2_1-row3_2
+            let row3_3 = row2_2-row3_2
+
+            return [
+                row1_1,
+                row2_1, row2_2,
+                row3_1, row3_2, row3_3,
+            ];
+        }
+
+        function render(data) {
+            document.getElementById('table-body').innerHTML = '';
+
+            for (row = 0; row < 4; row++) {
+                let tr = '<tr>';
+                for (col = 0; col < 2; col++) {
+                    const d = data[row * 2 + col]
+
+                    tr += `<td>
+                            <div class="pyramid">
+                                <div class="pyramid-row pyramid-row-1st-row">
+                                    <div class="pyramid-cell pyramid-cell-border-bottom-none">&nbsp;&nbsp;</div>
+                                </div>
+                                <div class="pyramid-row pyramid-row-2nd-row">
+                                    <div class="pyramid-cell pyramid-cell-border-bottom-none pyramid-cell-border-right-none">&nbsp;&nbsp;</div>
+                                    <div class="pyramid-cell pyramid-cell-border-bottom-none">&nbsp;&nbsp;</div>
+                                </div>
+                                <div class="pyramid-row">
+                                    <div class="pyramid-cell pyramid-cell-border-right-none">${d[3]}</div>
+                                    <div class="pyramid-cell pyramid-cell-border-right-none">${d[4]}</div>
+                                    <div class="pyramid-cell">${d[5]}</div>
+                                </div>
+                            </div>
+                        </td>`
+                }
+                document.getElementById('table-body').innerHTML += tr
+            }
+        }
+
+        function loadDataFromHash() {
+            let data = []
+
+            let hash = window.location.hash
+            if (hash.length > 1) {
+                try {
+                    data = JSON.parse(hash.substring(1))
+                } catch (e) {
+                    // ignore err
+                }
+            }
+
+            return data
+        }
+
+        function updateData() {
+            let data = []
+            for (i = 0; i < 4 * 2; i++) {
+                data.push(genPyramid())
+            }
+            history.replaceState(undefined, undefined, "#" + JSON.stringify(data))
+        }
+
+        function update() {
+            updateData()
+            let data = loadDataFromHash()
+            render(data)
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        }, false);
+
+        window.addEventListener('hashchange', function () {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        });
+    </script>
+</head>
+<body>
+<main class="container-fluid">
+    <h1 class="page-h1">
+        Two-digit addition pyramid <a class="noprint" onclick="update();">(update)</a>
+    </h1>
+
+    <table class="page-table pyramid-table">
+        <tbody id="table-body"></tbody>
+    </table>
+</main>
+</body>
+</html>
