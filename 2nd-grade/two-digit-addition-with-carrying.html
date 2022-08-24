@@ -6,14 +6,21 @@
     <link rel="stylesheet" href="../css/custom.css">
     <script type="text/javascript" src="../js/utils.js"></script>
 
-    <title>Two-digit addition - 2nd grade</title>
+    <title>Two-digit addition with carrying - 2nd grade</title>
 
     <script type="text/javascript">
         function twoDigitsForSumWithoutCarry() {
-            let n1 = randomIntFromInterval(10, 89)
-            let n2_01 = n1 - parseInt(n1/10)*10
-            let n2_10 = parseInt(n1/10);
-            let n2 = randomIntFromInterval(1, 9 - n2_10) * 10 + randomIntFromInterval(0, 9 - n2_01)
+            let n1_01 = randomIntFromInterval(1, 8)
+            let n1_10 = randomIntFromInterval(1, 7)
+            let n1 = n1_10 * 10 + n1_01
+
+            let n2_01 = randomIntFromInterval(10 - n1_01, 9)
+            let n2_10 = randomIntFromInterval(1, 8 - n1_10)
+            let n2 = n2_10 * 10 + n2_01
+
+            // let n1_01 = n1 - parseInt(n1/10)*10
+            // let n1_10 = parseInt(n1/10);
+            // let n2 = randomIntFromInterval(1, 9 - n1_10) * 10 + randomIntFromInterval(0, 9 - n1_01)
 
             return {
                 n1: n1,
@@ -97,7 +104,7 @@
 <body>
 <main class="container-fluid">
     <h1 class="page-h1">
-        Two-digit addition <a class="noprint" onclick="update();">(update)</a>
+        Two-digit addition with carrying <a class="noprint" onclick="update();">(update)</a>
     </h1>
 
     <table class="page-table two-digits-table">
