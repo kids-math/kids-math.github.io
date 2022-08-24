@@ -2,6 +2,10 @@
     margin: 0 2em 2em;
 }
 
+.page-p {
+    margin: 0 4em 2em;
+}
+
 .page-table td {
     border-bottom: none;
 }
