@@ -25,6 +25,7 @@ table.addition-to-10 {
     font-size: 3.1em;
     padding-bottom: 2.5em;
     padding-left: 10%;
+    white-space:nowrap;
 }
 
 /*Two digit addition*/
