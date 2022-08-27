@@ -16,6 +16,17 @@
     }
 }
 
+/*Addition to 10*/
+table.addition-to-10 {
+    margin-top: 4.5em;
+}
+
+.addition-to-10 td {
+    font-size: 3.1em;
+    padding-bottom: 2.5em;
+    padding-left: 10%;
+}
+
 /*Two digit addition*/
 .two-digits-table td {
     font-size: 1.5em;

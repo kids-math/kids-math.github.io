@@ -1,0 +1,100 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/pico.min.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <script type="text/javascript" src="../js/utils.js"></script>
+
+    <title>Addition to 10 - 2nd grade</title>
+
+    <script type="text/javascript">
+        function twoDigits() {
+            let result = randomIntFromInterval(1, 9)
+            let n1 = randomIntFromInterval(1, result)
+            let n2 = result - n1
+
+            return {
+                n1: n1,
+                n2: n2,
+            }
+        }
+
+        function render(data) {
+            document.getElementById('table-body').innerHTML = '';
+
+            for (row = 0; row < 5; row++) {
+                let tr = '<tr>';
+                for (col = 0; col < 2; col++) {
+                    const d = data[row * 2 + col]
+                    const n1 = d[0]
+                    const n2 = d[1]
+
+                    tr += `<td>${n1} + ${n2} = &nbsp;</td>`
+                }
+                tr += '</tr>'
+                document.getElementById('table-body').innerHTML += tr
+            }
+        }
+
+        function loadDataFromHash() {
+            let data = []
+
+            let hash = window.location.hash
+            if (hash.length > 1) {
+                try {
+                    data = JSON.parse(hash.substring(1))
+                } catch (e) {
+                    // ignore err
+                }
+            }
+
+            return data
+        }
+
+        function updateData() {
+            let data = []
+            for (i = 0; i < 5 * 2; i++) {
+                const {n1, n2} = twoDigits()
+                data.push([n1, n2])
+            }
+            history.replaceState(undefined, undefined, "#" + JSON.stringify(data))
+        }
+
+        function update() {
+            updateData()
+            let data = loadDataFromHash()
+            render(data)
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        }, false);
+
+        window.addEventListener('hashchange', function () {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        });
+    </script>
+</head>
+<body>
+<main class="container-fluid">
+    <h1 class="page-h1">
+        Addition to 10 <a class="noprint" onclick="update();">(update)</a>
+    </h1>
+
+    <table class="page-table addition-to-10">
+        <tbody id="table-body"></tbody>
+    </table>
+</main>
+</body>
+</html>
