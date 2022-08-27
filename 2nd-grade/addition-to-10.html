@@ -14,6 +14,13 @@
             let n1 = randomIntFromInterval(1, result)
             let n2 = result - n1
 
+            if (randomIntFromInterval(0, 1) > 0) {
+                return {
+                    n1: n2,
+                    n2: n1,
+                }
+            }
+
             return {
                 n1: n1,
                 n2: n2,
