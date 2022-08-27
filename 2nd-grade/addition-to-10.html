@@ -62,10 +62,24 @@
         function updateData() {
             let data = []
             for (i = 0; i < 5 * 2; i++) {
-                const {n1, n2} = twoDigits()
+                let {n1, n2} = twoDigits()
+                for (j = 0; j < 3 && problemExists(data, n1, n2); j++) {
+                    let n = twoDigits()
+                    n1 = n.n1
+                    n2 = n.n2
+                }
                 data.push([n1, n2])
             }
             history.replaceState(undefined, undefined, "#" + JSON.stringify(data))
+        }
+
+        function problemExists(data, n1, n2) {
+            for (const d of data) {
+                if (d[0] === n1 && d[1] === n2) {
+                    return true
+                }
+            }
+            return false
         }
 
         function update() {
