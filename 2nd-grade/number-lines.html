@@ -1,0 +1,125 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/pico.min.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <script type="text/javascript" src="../js/utils.js"></script>
+
+    <title>Number lines - 2nd grade</title>
+
+    <script type="text/javascript">
+        function numberLineExpression() {
+            let sign1 = randomIntFromInterval(0, 1) === 0 ? '+' : '-'
+            let sign2 = randomIntFromInterval(0, 1) === 0 ? '+' : '-'
+
+            let n1 = 0
+            let n2 = 0
+            let n3 = 0
+
+            if (sign1 === sign2) {
+                if (sign1 === '+') {
+                    n1 = randomIntFromInterval(0, 3)
+                    n2 = randomIntFromInterval(1, 3)
+                    n3 = randomIntFromInterval(1, 10 - n1 - n2)
+                }
+
+                if (sign1 === sign2 && sign1 === '-') {
+                    n1 = randomIntFromInterval(7, 10)
+                    n2 = randomIntFromInterval(1, 3)
+                    n3 = randomIntFromInterval(1, n1 - n2)
+                }
+            } else {
+                if (sign1 === '+') {
+                    n1 = randomIntFromInterval(0, 7)
+                    n2 = randomIntFromInterval(1, 10 - n1)
+                    n3 = randomIntFromInterval(1, 10 - (n1 + n2))
+                }
+
+                if (sign1 === '-') {
+                    n1 = randomIntFromInterval(3, 10)
+                    n2 = randomIntFromInterval(1, n1)
+                    n3 = randomIntFromInterval(1, 10 - (n1 - n2))
+                }
+            }
+
+            return `${n1} ${sign1} ${n2} ${sign2} ${n3}`
+        }
+
+        function render(data) {
+            document.getElementById('table-body').innerHTML = '';
+
+            for (row = 0; row < 5; row++) {
+                let tr = '<tr>';
+                for (col = 0; col < 2; col++) {
+                    const expr = data[row * 2 + col]
+
+                    tr += `<td>${expr} = &nbsp;</td>`
+                }
+                tr += '</tr>'
+                document.getElementById('table-body').innerHTML += tr
+            }
+        }
+
+        function loadDataFromHash() {
+            let data = []
+
+            let hash = window.location.hash
+            if (hash.length > 1) {
+                try {
+                    const d = decodeURI(hash.substring(1))
+                    data = JSON.parse(d)
+                } catch (e) {
+                    // ignore err
+                }
+            }
+
+            return data
+        }
+
+        function updateData() {
+            let data = []
+            for (i = 0; i < 5 * 2; i++) {
+                let expr = numberLineExpression()
+                data.push(expr)
+            }
+            history.replaceState(undefined, undefined, "#" + JSON.stringify(data))
+        }
+
+        function update() {
+            updateData()
+            let data = loadDataFromHash()
+            render(data)
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        }, false);
+
+        window.addEventListener('hashchange', function () {
+            let data = loadDataFromHash()
+            if (data.length === 0) {
+                updateData()
+                data = loadDataFromHash()
+            }
+            render(data)
+        });
+    </script>
+</head>
+<body>
+<main class="container-fluid">
+    <h1 class="page-h1">
+        Number lines <a class="noprint" onclick="update();">(update)</a>
+    </h1>
+
+    <table class="page-table addition-to-10">
+        <tbody id="table-body"></tbody>
+    </table>
+</main>
+</body>
+</html>
