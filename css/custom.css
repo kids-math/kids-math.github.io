@@ -28,6 +28,14 @@ table.addition-to-10 {
     white-space:nowrap;
 }
 
+/*Addition & subtraction to 20*/
+.addition-subtraction-to-20 td {
+    font-size: 1.6em;
+    padding-bottom: 2.5em;
+    padding-left: 5%;
+    white-space:nowrap;
+}
+
 /*Two digit addition*/
 .two-digits-table td {
     font-size: 1.5em;
